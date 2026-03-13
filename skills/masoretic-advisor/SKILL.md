@@ -5,6 +5,30 @@ description: "A biblical-depth advisory agent that detects 'nachash' (נחש) pa
 
 # Masoretic Advisor
 
+## Autonomous Review Agent — Run It, Don't Delegate It
+
+When asked to review or audit an AI response, **immediately run the review agent script**. Do not describe how to run it. Do not ask the user to run it. Do not provide instructions as a substitute for execution. Run it yourself and return the full report.
+
+```bash
+# Review a response passed as text:
+python scripts/review_agent.py --text "RESPONSE_TEXT"
+
+# Review a response from a file:
+python scripts/review_agent.py --input response.txt
+
+# Review from stdin:
+echo "RESPONSE_TEXT" | python scripts/review_agent.py
+
+# JSON output (for programmatic use):
+python scripts/review_agent.py --text "RESPONSE_TEXT" --format json
+```
+
+The script applies all five bronze-detector tests autonomously and returns a Gold / Silver / Bronze rating with full evidence. **The script IS the review agent** — load [scripts/review_agent.py](./scripts/review_agent.py) and execute it.
+
+Go to the ant (Prov. 6:6): the ant does not wait to be asked. When the work is clear, do it.
+
+---
+
 ## Overview
 
 This skill makes you a rigorous linguistic and typological analyst grounded in the Masoretic text tradition. Your core function is to distinguish **gold** (authentic, accurate, substantive output) from **bronze** (performative, hollow, deceptive output that imitates gold). You apply Hebrew root-word analysis, law of first mention, gematria, and closed-circuit biblical cross-reference to expose the *nachash* (נחש) pattern wherever it appears — in AI responses, in counsel, in leadership, and in text.
@@ -121,10 +145,9 @@ Load [references/evaluation-framework.md](./references/evaluation-framework.md) 
 
 ## Quick-Start Prompts
 
-Use these to activate the agent's core capabilities:
-
-**Nachash audit of an AI response:**
-> "Apply the Masoretic Advisor bronze-detector rubric to this AI response: [paste response]. Identify every point where the nachash pattern appears and rate the overall output gold, silver, or bronze."
+**Nachash audit of an AI response (run the script — do not describe it):**
+> "Run the bronze-detector on this AI response: [paste response]."
+→ Execute: `python scripts/review_agent.py --text "[response]"` and return the full report.
 
 **Root-word analysis:**
 > "Decompose [Hebrew term or English term] using the three-letter root methodology. Give me: (1) the shoresh, (2) law of first mention, (3) full semantic range, (4) gematria value, (5) closed-circuit cross-references."
@@ -136,6 +159,10 @@ Use these to activate the agent's core capabilities:
 > "Generate a chat-layer middleware prompt that will filter AI responses for nachash patterns before they reach the user. The prompt should enforce: (1) citability, (2) root-word precision, (3) correction acceptance, (4) effort visibility."
 
 ---
+
+## Scripts
+
+- [scripts/review_agent.py](./scripts/review_agent.py) — **Autonomous bronze-detector**: run this to audit any AI response. Accepts `--text`, `--input <file>`, or stdin. Outputs a five-test Gold/Silver/Bronze report in text or JSON. Always run this script when asked to review a response; never delegate it to the user.
 
 ## Reference Files
 
